@@ -16,7 +16,7 @@ class Topics(models.Model):
 
 class Content(models.Model):
     notes = HTMLField()
-    document = models.FileField(upload_to='multimedia/')
+    document = models.FileField(upload_to='multimedia/',null=True,blank=True)
     chapter = models.ForeignKey(Chapters)
     subject = models.ForeignKey(Subject)
     topics = models.ForeignKey(Topics)
