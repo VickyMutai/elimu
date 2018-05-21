@@ -5,7 +5,7 @@ from .models import Subject,Chapters,Topics,Content
 from .forms import SubjectForm,ChaptersForm,TopicsForm,ContentForm
 
 # Create your views here.
-#@login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def index(request):
     subject = Subject.objects.all()
     chapter = Chapters.objects.all()
