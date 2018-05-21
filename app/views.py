@@ -7,6 +7,10 @@ from .forms import SubjectForm,ChaptersForm,TopicsForm,ContentForm
 # Create your views here.
 #@login_required(login_url='/accounts/login/')
 def index(request):
+    subject = Subject.objects.all()
+    chapter = Chapters.objects.all()
+    topic = Topics.objects.all()
+    content = Content.objects.all()
     #subject form
     if request.method == 'POST':
         subject_form = SubjectForm(request.POST)
@@ -26,7 +30,7 @@ def index(request):
     #content form
     if request.method == 'POST':
         content_form = ContentForm(request.POST)
-        if form.is_valid():
+        if content_form.is_valid():
             content = content_form.save(commit=False)
             content.save
     else:
@@ -44,5 +48,9 @@ def index(request):
         "subject_form":subject_form,
         "content_form":content_form,
         "topic_form":topic_form,
+        "subject":subject,
+        "chapter":chapter,
+        "content":content,
+        "topic":topic,
     }
     return render (request,'index.html',args)
