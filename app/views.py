@@ -8,17 +8,24 @@ from .forms import SubjectForm,ChaptersForm,TopicsForm,ContentForm
 #@login_required(login_url='/accounts/login/')
 def index(request):
     test = "Working!!"
-    return render (request,'index.html',{"test":test})
-
-def new_subject(request):
     if request.method == 'POST':
         form = SubjectForm(request.POST)
         if form.is_valid():
             subject = form.save(commit=False)
             subject.save
-        else:
-            form = SubjectForm()
-    return render(request,'subject.html',{"form":form})
+    else:
+        form = SubjectForm()
+    return render (request,'index.html',{"test":test,"form":form})
+
+# def new_subject(request):
+#     if request.method == 'POST':
+#         form = SubjectForm(request.POST)
+#         if form.is_valid():
+#             subject = form.save(commit=False)
+#             subject.save
+#     else:
+#         form = SubjectForm()
+#     return render(request,'subject.html',{"form":form})
 
 def new_chapter(request):
     if request.method == 'POST':
@@ -36,8 +43,8 @@ def new_topic(request):
         if form.is_valid():
             topic = form.save(commit=False)
             topic.save
-        else:
-            form = TopicsForm()
+    else:
+        form = TopicsForm()
     return render(request,'topic.html',{"form":form})
 
 def new_content(request):
@@ -46,6 +53,6 @@ def new_content(request):
         if form.is_valid():
             content = form.save(commit=False)
             content.save
-        else:
-            form = ContentForm()
+    else:
+        form = ContentForm()
     return render(request,'content.html',{"form":form})

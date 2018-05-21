@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-<h1 class="text-center" >{{test}}</h1>
+<form  action="{%url 'index'%}" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+
+    {% bootstrap_form form layout='inline'%}
+    <input type="submit" class="btn btn-success btn-lg" value="Post">
+  </form>
 {% endblock %}
