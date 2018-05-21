@@ -7,52 +7,42 @@ from .forms import SubjectForm,ChaptersForm,TopicsForm,ContentForm
 # Create your views here.
 #@login_required(login_url='/accounts/login/')
 def index(request):
-    test = "Working!!"
+    #subject form
     if request.method == 'POST':
-        form = SubjectForm(request.POST)
-        if form.is_valid():
-            subject = form.save(commit=False)
+        subject_form = SubjectForm(request.POST)
+        if subject_form.is_valid():
+            subject = subject_form.save(commit=False)
             subject.save
     else:
-        form = SubjectForm()
-    return render (request,'index.html',{"test":test,"form":form})
-
-# def new_subject(request):
-#     if request.method == 'POST':
-#         form = SubjectForm(request.POST)
-#         if form.is_valid():
-#             subject = form.save(commit=False)
-#             subject.save
-#     else:
-#         form = SubjectForm()
-#     return render(request,'subject.html',{"form":form})
-
-def new_chapter(request):
+        subject_form = SubjectForm()
+    #chapters form
     if request.method == 'POST':
-        form = ChaptersForm(request.POST)
-        if form.is_valid():
-            chapter = form.save(commit=False)
+        chapter_form = ChaptersForm(request.POST)
+        if chapter_form.is_valid():
+            chapter = chapter_form.save(commit=False)
             chapter.save
     else:
-        form = ChaptersForm()
-    return render(request,'chapter.html',{"form":form})
-
-def new_topic(request):
+        chapter_form = ChaptersForm()
+    #content form
     if request.method == 'POST':
-        form = TopicsForm(request.POST)
+        content_form = ContentForm(request.POST)
         if form.is_valid():
-            topic = form.save(commit=False)
-            topic.save
-    else:
-        form = TopicsForm()
-    return render(request,'topic.html',{"form":form})
-
-def new_content(request):
-    if request.method == 'POST':
-        form = ContentForm(request.POST)
-        if form.is_valid():
-            content = form.save(commit=False)
+            content = content_form.save(commit=False)
             content.save
     else:
-        form = ContentForm()
-    return render(request,'content.html',{"form":form})
+        content_form = ContentForm()
+    #topic form
+    if request.method == 'POST':
+        topic_form = TopicsForm(request.POST)
+        if topic_form.is_valid():
+            topic = topic_form.save(commit=False)
+            topic.save
+    else:
+        topic_form = TopicsForm()
+    args = {
+        "chapter_form":chapter_form,
+        "subject_form":subject_form,
+        "content_form":content_form,
+        "topic_form":topic_form,
+    }
+    return render (request,'index.html',args)

@@ -4,7 +4,19 @@
 <form  action="{%url 'index'%}" method="post" enctype="multipart/form-data">
     {%csrf_token%}
 
-    {% bootstrap_form form layout='inline'%}
+    {% bootstrap_form subject_form layout='inline'%}
+    <input type="submit" class="btn btn-success btn-lg" value="Post">
+  </form>
+  <form  action="{%url 'index'%}" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+
+    {% bootstrap_form content_form layout='inline'%}
+    <input type="submit" class="btn btn-success btn-lg" value="Post">
+  </form>
+  <form  action="{%url 'index'%}" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+
+    {% bootstrap_form topic_form layout='inline'%}
     <input type="submit" class="btn btn-success btn-lg" value="Post">
   </form>
 {% endblock %}
